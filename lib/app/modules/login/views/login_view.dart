@@ -167,6 +167,7 @@ class LoginView extends StatelessWidget {
                             'Login',
                             style: TextStyle(
                               fontSize: 18,
+                              fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),

@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Aplikasi',
+      theme: ThemeData(
+        fontFamily: 'Roboto',
+      ),
       home: const SplashScreenWrapper(), // mulai dari splash
     );
   }
@@ -34,7 +37,7 @@ class _SplashScreenWrapperState extends State<SplashScreenWrapper> {
     Future.delayed(const Duration(seconds: 3), () {
       Get.to(
         () => const HomeView(),
-        transition: Transition.downToUp,
+        transition: Transition.fade,
         duration: const Duration(milliseconds: 1000),
       );
     });
