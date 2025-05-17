@@ -16,8 +16,8 @@ class SplashScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center, // Tengah vertikal
             children: [
               Container(
-                width: 330,
-                height: 130,
+                width: 300,
+                height: 100,
                 child: Image.asset("assets/logo/logo-splash.png"),
               ),
               const SizedBox(height: 30,),
@@ -30,7 +30,7 @@ class SplashScreen extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 18,
-                        fontWeight: FontWeight.w300,
+                        fontWeight: FontWeight.w400,
                         height: 1.6,
                       ),
                     ),
