@@ -7,6 +7,10 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
   static const BERANDA = _Paths.BERANDA;
+  static const PROFIL = _Paths.PROFIL;
+  static const PENGGUNAAN = _Paths.PENGGUNAAN;
+  static const EDITPROFIL = _Paths.EDITPROFIL;
+  static const NOTIF = _Paths.NOTIF;
 }
 
 abstract class _Paths {
@@ -15,4 +19,8 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const BERANDA = '/beranda';
+  static const PROFIL = '/profil';
+  static const PENGGUNAAN = '/penggunaan';
+  static const EDITPROFIL = '/editprofil';
+  static const NOTIF = '/notif';
 }

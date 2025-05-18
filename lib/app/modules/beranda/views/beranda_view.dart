@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'dart:async';
 import 'package:get/get.dart';
-
 import '../controllers/beranda_controller.dart';
+import '../../profil/views/profil_view.dart';
+import '../../penggunaan/views/penggunaan_view.dart';
+import '../../notif/views/notif_view.dart';
+
 
 class BerandaView extends StatelessWidget {
   const BerandaView({super.key});
@@ -56,7 +59,9 @@ class BerandaView extends StatelessWidget {
                         width: 20,
                         height: 20,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => NotifView());
+                      },
                     ),
                   ),
                   )
@@ -167,7 +172,7 @@ class BerandaView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 30,),
                         child: Text(
-                          'Fasilitas Terbatas',
+                          'Fasilitas',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -177,57 +182,47 @@ class BerandaView extends StatelessWidget {
                       SizedBox(height: 16),
                       
                       // Facility image
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Container(
-                            height: 120,
-                            width: double.infinity,
-                            color: Colors.grey.shade300,
-                            child: Image.asset(
-                              'assets/images/facility.jpg', // Replace with your image
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Center(
-                                  child: Icon(
-                                    Icons.image_not_supported,
-                                    size: 50,
-                                    color: Colors.grey,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
+                      GambarSlideshow(),
 
                       Spacer(),
                     // Bottom Navigation
                     Container(
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFCAF0F8),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(50),
-                            topRight: Radius.circular(50),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            _buildNavItem(
-                              iconlnk: 'assets/icon/icon-park-outline_schedule.png', 
-                              isSelected: false),
-                            _buildNavItem(
-                              iconlnk: 'assets/icon/home.png', 
-                              isSelected: true),
-                            _buildNavItem(
-                              iconlnk: 'assets/icon/profil.png', 
-                              isSelected: false),
-                          ],
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFCAF0F8),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50),
                         ),
                       ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildNavItem(
+                            iconlnk: 'assets/icon/icon-park-outline_schedule.png',
+                            isSelected: false,
+                            onTap: () {
+                              Get.to(() => PenggunaanView());
+                            },
+                          ),
+                          _buildNavItem(
+                            iconlnk: 'assets/icon/home.png',
+                            isSelected: true,
+                            onTap: () {
+                              Get.to(() => BerandaView());
+                            },
+                          ),
+                          _buildNavItem(
+                            iconlnk: 'assets/icon/profil.png',
+                            isSelected: false,
+                            onTap: () {
+                              Get.to(() => ProfilView());
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+
                     ],
                   ),
                 ),
@@ -279,20 +274,93 @@ class BerandaView extends StatelessWidget {
     );
   }
   
-  Widget _buildNavItem({required String iconlnk, required bool isSelected}) {
-    return Container(
+Widget _buildNavItem({
+  required String iconlnk,
+  required bool isSelected,
+  required VoidCallback onTap,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
       width: 50,
       height: 50,
       decoration: BoxDecoration(
         color: isSelected ? Color(0xFF00B4D8) : Colors.transparent,
-      borderRadius: BorderRadius.all(Radius.circular(20))
+        borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Center(
         child: Image.asset(
           iconlnk,
           width: 30,
           height: 30,
-        color: isSelected ? Colors.white : Colors.black,
+          color: isSelected ? Colors.white : Colors.black,
+        ),
+      ),
+    ),
+  );
+}
+
+}
+
+class GambarSlideshow extends StatefulWidget {
+  @override
+  _GambarSlideshowState createState() => _GambarSlideshowState();
+}
+
+class _GambarSlideshowState extends State<GambarSlideshow> {
+  final List<String> _imagePaths = [
+    'assets/img/aula.jpeg',
+    'assets/img/lapangan.png',
+    'assets/img/imglab2.jpg',
+  ];
+
+  int _currentIndex = 0;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      setState(() {
+        _currentIndex = (_currentIndex + 1) % _imagePaths.length;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: Container(
+          height: 120,
+          width: double.infinity,
+          child: IndexedStack(
+            index: _currentIndex,
+            children: _imagePaths.map((path) {
+              return Image.asset(
+                path,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                errorBuilder: (context, error, stackTrace) {
+                  return Center(
+                    child: Icon(
+                      Icons.image_not_supported,
+                      size: 50,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
