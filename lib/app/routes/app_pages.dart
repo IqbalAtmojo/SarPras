@@ -4,12 +4,18 @@ import '../modules/beranda/bindings/beranda_binding.dart';
 import '../modules/beranda/views/beranda_view.dart';
 import '../modules/editprofil/bindings/editprofil_binding.dart';
 import '../modules/editprofil/views/editprofil_view.dart';
+import '../modules/feedback/bindings/feedback_binding.dart';
+import '../modules/feedback/views/feedback_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/notif/bindings/notif_binding.dart';
 import '../modules/notif/views/notif_view.dart';
+import '../modules/pelaporan/bindings/pelaporan_binding.dart';
+import '../modules/pelaporan/views/pelaporan_view.dart';
+import '../modules/peminjaman/bindings/peminjaman_binding.dart';
+import '../modules/peminjaman/views/peminjaman_view.dart';
 import '../modules/penggunaan/bindings/penggunaan_binding.dart';
 import '../modules/penggunaan/views/penggunaan_view.dart';
 import '../modules/profil/bindings/profil_binding.dart';
@@ -64,6 +70,21 @@ class AppPages {
       name: _Paths.NOTIF,
       page: () => const NotifView(),
       binding: NotifBinding(),
+    ),
+    GetPage(
+      name: _Paths.PEMINJAMAN,
+      page: () => const PeminjamanView(),
+      binding: PeminjamanBinding(),
+    ),
+    GetPage(
+      name: _Paths.PELAPORAN,
+      page: () => const PelaporanView(),
+      binding: PelaporanBinding(),
+    ),
+    GetPage(
+      name: _Paths.FEEDBACK,
+      page: () => const FeedbackView(),
+      binding: FeedbackBinding(),
     ),
   ];
 }

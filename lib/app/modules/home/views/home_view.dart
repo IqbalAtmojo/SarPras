@@ -13,24 +13,20 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: null,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-      ),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(flex: 2),            
+            Spacer(flex: 3),            
             Container(
               width: 330,
               height: 130,
               child: Image.asset("assets/logo/teksLogo.png"),
             ),
-            SizedBox(height: 10), // Add spacing between logo and buttons
+            SizedBox(height: 10), 
             Container(
-              width: 180, // Width matching the button in the image
+              width: 180, 
               height: 40,
               child: ElevatedButton(
                 onPressed: () {
@@ -52,9 +48,9 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
             ),
-            SizedBox(height: 15), // Spacing between buttons
+            SizedBox(height: 15),
             Container(
-              width: 180, // Width matching the button in the image
+              width: 180, 
               height: 40,
               child: ElevatedButton(
                 onPressed: () {
@@ -63,7 +59,7 @@ class HomeView extends GetView<HomeController> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF48CAE4), // Light turquoise color (#48CAE4)
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25), // Highly rounded corners
+                    borderRadius: BorderRadius.circular(25), 
                   ),
                 ),
                 child: Text(

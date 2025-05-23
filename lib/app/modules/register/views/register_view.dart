@@ -12,7 +12,7 @@ class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF2EFE9),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Container(
@@ -47,18 +47,19 @@ class RegisterView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 20),
+                    SizedBox(height: 15),
                     
                     // Nama Lengkap Field
                     Text(
                       'Nama Lengkap',
                       style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
+                      height: 45,
                       decoration: BoxDecoration(
                         color: Color(0xFFCAF0F8), // Light blue input field
                         borderRadius: BorderRadius.circular(15),
@@ -72,6 +73,9 @@ class RegisterView extends StatelessWidget {
                         ],
                       ),
                       child: TextField(
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -85,12 +89,13 @@ class RegisterView extends StatelessWidget {
                     Text(
                       'NISN',
                       style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
+                      height: 45,
                       decoration: BoxDecoration(
                         color: Color(0xFFCAF0F8), // Light blue input field
                         borderRadius: BorderRadius.circular(15),
@@ -104,6 +109,9 @@ class RegisterView extends StatelessWidget {
                         ],
                       ),
                       child: TextField(
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -117,12 +125,13 @@ class RegisterView extends StatelessWidget {
                     Text(
                       'Buat Password',
                       style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
+                      height: 45,
                       decoration: BoxDecoration(
                         color: Color(0xFFCAF0F8), // Light blue input field
                         borderRadius: BorderRadius.circular(15),
@@ -136,6 +145,9 @@ class RegisterView extends StatelessWidget {
                         ],
                       ),
                       child: TextField(
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                         obscureText: true, // For password field
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -150,12 +162,13 @@ class RegisterView extends StatelessWidget {
                     Text(
                       'No. Telepon',
                       style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
+                      height: 45,
                       decoration: BoxDecoration(
                         color: Color(0xFFCAF0F8), // Light blue input field
                         borderRadius: BorderRadius.circular(15),
@@ -169,6 +182,9 @@ class RegisterView extends StatelessWidget {
                         ],
                       ),
                       child: TextField(
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                           decoration: InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),

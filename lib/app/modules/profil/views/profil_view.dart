@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/profil_controller.dart';
-import '../../beranda/views/beranda_view.dart';
-import '../../penggunaan/views/penggunaan_view.dart';
 import '../../home/views/home_view.dart';
 import '../../editprofil/views/editprofil_view.dart';
 import '../../notif/views/notif_view.dart';
+import 'package:k/app/widgets/navbar.dart';
+
 
 class ProfilView extends GetView<ProfilController> {
   const ProfilView({super.key});
@@ -186,42 +186,7 @@ class ProfilView extends GetView<ProfilController> {
                     },
                   ),
                   Spacer(),
-                    Container(
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFCAF0F8),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _buildNavItem(
-                            iconlnk: 'assets/icon/icon-park-outline_schedule.png',
-                            isSelected: false,
-                            onTap: () {
-                              Get.to(() => PenggunaanView());
-                            },
-                          ),
-                          _buildNavItem(
-                            iconlnk: 'assets/icon/home.png',
-                            isSelected: false,
-                            onTap: () {
-                              Get.to(() => BerandaView());
-                            },
-                          ),
-                          _buildNavItem(
-                            iconlnk: 'assets/icon/profil.png',
-                            isSelected: true,
-                            onTap: () {
-                              Get.to(() => ProfilView());
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
+                    CustomBottomNavBar()
                 ],
               ),
             ),

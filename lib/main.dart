@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Aplikasi',
       theme: ThemeData(
-        fontFamily: 'Roboto',
+        fontFamily: 'Poppins',
       ),
       home: const SplashScreenWrapper(), // mulai dari splash
     );

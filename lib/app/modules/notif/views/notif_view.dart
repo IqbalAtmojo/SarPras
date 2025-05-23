@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/notif_controller.dart';
-import '../../beranda/views/beranda_view.dart';
-import '../../profil/views/profil_view.dart';
-import '../../penggunaan/views/penggunaan_view.dart';
+import 'package:k/app/widgets/navbar.dart';
+
 
 class NotifView extends GetView<NotifController> {
   const NotifView({super.key});
@@ -68,7 +67,7 @@ class NotifView extends GetView<NotifController> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 70),
+                      SizedBox(height: 35),
 
               ],
             ),
@@ -85,7 +84,7 @@ class NotifView extends GetView<NotifController> {
                               ),
                               child: 
                        Padding(
-                         padding: const EdgeInsets.fromLTRB(40, 35, 40, 0),
+                         padding: EdgeInsets.fromLTRB(40, 35, 40, 0),
                          child: SingleChildScrollView(
                            child: Column(
                             children: [
@@ -99,10 +98,10 @@ class NotifView extends GetView<NotifController> {
                                   )
                                 ],
                               ),
-                              SizedBox(height: 30),
+                              SizedBox(height: 20),
                               NotificationCard(
                                 title: 'Kerusakan',
-                                description: 'Terdapat kerusakan pada monitor nomor 2 di Lab Komputer 2',
+                                description: 'Terdapat kerusakan pada monitor 2 di Lab Komputer 2',
                                 iconPath: 'assets/icon/notif.png',
                               ),
                               NotificationCard(
@@ -115,9 +114,29 @@ class NotifView extends GetView<NotifController> {
                                 description: 'Peminjaman Lapangan telah disetujui',
                                 iconPath: 'assets/icon/notif.png',
                               ),
-
-
-                              SizedBox(height: 25),
+                              SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text('Kemarin',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              NotificationCard(
+                                title: 'Peminjaman',
+                                description: 'Peminjaman Aula telah ditolak',
+                                iconPath: 'assets/icon/notif.png',
+                              ),
+                              NotificationCard(
+                                title: 'Perbaikan',
+                                description: 'Terdapat perbaikan di Ruang 10',
+                                iconPath: 'assets/icon/notif.png',
+                              ),
+                              SizedBox(height: 30),
                             ],
                           ),
                          ),
@@ -125,50 +144,7 @@ class NotifView extends GetView<NotifController> {
 
                             ),
                        ), 
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-
-                      ),
-                      child: 
-                        Container(
-                          height: 80,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFCAF0F8),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                              topRight: Radius.circular(50),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              _buildNavItem(
-                                iconlnk: 'assets/icon/icon-park-outline_schedule.png',
-                                isSelected: false,
-                                onTap: () {
-                                  Get.to(() => PenggunaanView());
-                                },
-                              ),
-                              _buildNavItem(
-                                iconlnk: 'assets/icon/home.png',
-                                isSelected: false,
-                                onTap: () {
-                                  Get.to(() => BerandaView());
-                                },
-                              ),
-                              _buildNavItem(
-                                iconlnk: 'assets/icon/profil.png',
-                                isSelected: false,
-                                onTap: () {
-                                  Get.to(() => ProfilView());
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      
-                    ),
+                    CustomBottomNavBar()
         ],
                     
       ),
@@ -176,32 +152,6 @@ class NotifView extends GetView<NotifController> {
   }
 }
 
-
-Widget _buildNavItem({
-  required String iconlnk,
-  required bool isSelected,
-  required VoidCallback onTap,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        color: isSelected ? Color(0xFF00B4D8) : Colors.transparent,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Center(
-        child: Image.asset(
-          iconlnk,
-          width: 30,
-          height: 30,
-          color: isSelected ? Colors.white : Colors.black,
-        ),
-      ),
-    ),
-  );
-}
 
 class NotificationCard extends StatelessWidget {
   final String title;

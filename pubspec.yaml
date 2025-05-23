@@ -37,6 +37,7 @@ dependencies:
   get: ^4.7.2
   google_fonts: ^6.2.1
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,6 +69,15 @@ flutter:
       fonts:
         - asset: assets/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf
         - asset: assets/fonts/Roboto-VariableFont_wdth,wght.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Black.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+        - asset: assets/fonts/Poppins-Thin.ttf
         
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:k/app/modules/editprofil/controllers/editprofil_controller.dart';
-
-import '../../beranda/views/beranda_view.dart';
-import '../../penggunaan/views/penggunaan_view.dart';
+import 'package:k/app/widgets/navbar.dart';
 import '../../profil/views/profil_view.dart';
 import '../../notif/views/notif_view.dart';
 
@@ -13,6 +11,7 @@ class EditprofilView extends GetView<EditprofilController> {
  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           // Top Header with profile picture
@@ -175,15 +174,15 @@ class EditprofilView extends GetView<EditprofilController> {
                       'Nama Lengkap',
                       style: TextStyle(
                         fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
-                      height: 50,
+                      height: 40,
                       decoration: BoxDecoration(
                         color: Color(0xFFCAF0F8), // Light blue input field
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.25),
@@ -194,6 +193,9 @@ class EditprofilView extends GetView<EditprofilController> {
                         ],
                       ),
                       child: TextField(
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                         controller: TextEditingController(text: 'Ekasandi Iqbal Atmojo'),
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -209,15 +211,15 @@ class EditprofilView extends GetView<EditprofilController> {
                       'NISN',
                       style: TextStyle(
                         fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
-                      height: 50,
+                      height: 40,
                       decoration: BoxDecoration(
                         color: Color(0xFFCAF0F8), // Light blue input field
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.25),
@@ -228,42 +230,10 @@ class EditprofilView extends GetView<EditprofilController> {
                         ],
                       ),
                       child: TextField(
-                        controller: TextEditingController(text: '0084269639'),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                        style: TextStyle(
+                          fontSize: 15,
                         ),
-                      ),
-                    ),
-                    
-                    SizedBox(height: 20),
-                    
-                    // Password Field
-                    Text(
-                      'Password',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFCAF0F8), // Light blue input field
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.25),
-                            blurRadius: 4,
-                            offset: Offset(0, 4),
-                            spreadRadius: 0,
-                          ),
-                        ],
-                      ),
-                      child: TextField(
-                        obscureText: true, // For password field
-                        controller: TextEditingController(text: '12345'),
+                        controller: TextEditingController(text: '0084269639'),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -278,15 +248,15 @@ class EditprofilView extends GetView<EditprofilController> {
                       'No. Telepon',
                       style: TextStyle(
                         fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
-                      height: 50,
+                      height: 40,
                       decoration: BoxDecoration(
                         color: Color(0xFFCAF0F8), // Light blue input field
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.25),
@@ -297,6 +267,9 @@ class EditprofilView extends GetView<EditprofilController> {
                         ],
                       ),
                       child: TextField(
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                           controller: TextEditingController(text: '082230130798'),
                           decoration: InputDecoration(
                           border: InputBorder.none,
@@ -305,16 +278,16 @@ class EditprofilView extends GetView<EditprofilController> {
                       ),
                     ),
 
-                    SizedBox(height: 20),
+                    SizedBox(height: 35),
                     
-                    // Register Button
+                    // edit Button
                     Center(
                       child: Container(
-                        width: 200,
+                        width: 180,
                         height: 40,
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.to(() => BerandaView());
+                            Get.to(() => ProfilView());
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFF00B4D8), // Turquoise blue button
@@ -341,42 +314,7 @@ class EditprofilView extends GetView<EditprofilController> {
             ),
           ),
                   
-                    Container(
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFCAF0F8),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _buildNavItem(
-                            iconlnk: 'assets/icon/icon-park-outline_schedule.png',
-                            isSelected: false,
-                            onTap: () {
-                              Get.to(() => PenggunaanView());
-                            },
-                          ),
-                          _buildNavItem(
-                            iconlnk: 'assets/icon/home.png',
-                            isSelected: false,
-                            onTap: () {
-                              Get.to(() => BerandaView());
-                            },
-                          ),
-                          _buildNavItem(
-                            iconlnk: 'assets/icon/profil.png',
-                            isSelected: true,
-                            onTap: () {
-                              Get.to(() => ProfilView());
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
+                    CustomBottomNavBar()
                 ],
               ),
             ),
@@ -386,31 +324,4 @@ class EditprofilView extends GetView<EditprofilController> {
       ),
     );
   }
-  
-
-Widget _buildNavItem({
-  required String iconlnk,
-  required bool isSelected,
-  required VoidCallback onTap,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        color: isSelected ? Color(0xFF00B4D8) : Colors.transparent,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Center(
-        child: Image.asset(
-          iconlnk,
-          width: 30,
-          height: 30,
-          color: isSelected ? Colors.white : Colors.black,
-        ),
-      ),
-    ),
-  );
-}
 }

@@ -11,6 +11,9 @@ abstract class Routes {
   static const PENGGUNAAN = _Paths.PENGGUNAAN;
   static const EDITPROFIL = _Paths.EDITPROFIL;
   static const NOTIF = _Paths.NOTIF;
+  static const PEMINJAMAN = _Paths.PEMINJAMAN;
+  static const PELAPORAN = _Paths.PELAPORAN;
+  static const FEEDBACK = _Paths.FEEDBACK;
 }
 
 abstract class _Paths {
@@ -23,4 +26,7 @@ abstract class _Paths {
   static const PENGGUNAAN = '/penggunaan';
   static const EDITPROFIL = '/editprofil';
   static const NOTIF = '/notif';
+  static const PEMINJAMAN = '/peminjaman';
+  static const PELAPORAN = '/pelaporan';
+  static const FEEDBACK = '/feedback';
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:get/get.dart';
-import '../controllers/beranda_controller.dart';
-import '../../profil/views/profil_view.dart';
-import '../../penggunaan/views/penggunaan_view.dart';
+import 'package:k/app/modules/pelaporan/views/pelaporan_view.dart';
 import '../../notif/views/notif_view.dart';
+import '../../peminjaman/views/peminjaman_view.dart';
+import '../../feedback/views/feedback_view.dart';
+import 'package:k/app/widgets/navbar.dart';
+
 
 
 class BerandaView extends StatelessWidget {
@@ -16,7 +18,6 @@ class BerandaView extends StatelessWidget {
       body: 
         Column(
           children: [
-            // Header with greeting and notification
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 70, 20, 8),
               child: Row(
@@ -28,17 +29,9 @@ class BerandaView extends StatelessWidget {
                       Text(
                         'Hi, Selamat Datang',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        'Di Aplikasi Pengelolaan Fasilitas\nSMPN 7 MALANG',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -71,7 +64,7 @@ class BerandaView extends StatelessWidget {
 
             // Total facilities count
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Column(
                 children: [
                   Row(
@@ -79,15 +72,15 @@ class BerandaView extends StatelessWidget {
                     children: [
                       Image.asset(
                         'assets/icon/mdi_google-classroom.png',
-                        width: 24,
-                        height: 24,
+                        width: 21,
+                        height: 21,
                         color: Colors.black,
                       ),
                       SizedBox(width: 8,),
                       Text(
                         'Total Fasilitas',
                         style: TextStyle(
-                          fontSize: 26,
+                          fontSize: 21,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
@@ -100,9 +93,9 @@ class BerandaView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        '1.903',
+                        '1.408',
                         style: TextStyle(
-                          fontSize: 26,
+                          fontSize: 21,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
@@ -112,7 +105,7 @@ class BerandaView extends StatelessWidget {
                 ],
               ),
             ),
-
+            SizedBox(height: 25),
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -143,25 +136,35 @@ class BerandaView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
+                          
                           // Pelaporan Kerusakan
                           fitur(
                             iconPath: 'assets/icon/rusak.png',
                             title: 'Pelaporan\nKerusakan',
-                            color: Colors.red,
+                            color: Color(0xFF023E8A),
+                            onTap: (){
+                              Get.to(() => PelaporanView());
+                            }
                           ),
                           
                           // Peminjaman Fasilitas
                           fitur(
                             iconPath: 'assets/icon/lineicons_school-bench-1.png',
                             title: 'Peminjaman\nFasilitas',
-                            color: Colors.yellow,
+                            color: Color(0xFF023E8A),
+                            onTap: (){
+                              Get.to(() => PeminjamanView());
+                            }
                           ),
                           
                           // Feedback Aplikasi
                           fitur(
                             iconPath: 'assets/icon/feedback.png',
                             title: 'Feedback\nAplikasi',
-                            color: Colors.black,
+                            color: Color(0xFF023E8A),
+                            onTap: (){
+                              Get.to(() => FeedbackView());
+                            }
                           ),
                         ],
                       ),
@@ -186,42 +189,7 @@ class BerandaView extends StatelessWidget {
 
                       Spacer(),
                     // Bottom Navigation
-                    Container(
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFCAF0F8),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _buildNavItem(
-                            iconlnk: 'assets/icon/icon-park-outline_schedule.png',
-                            isSelected: false,
-                            onTap: () {
-                              Get.to(() => PenggunaanView());
-                            },
-                          ),
-                          _buildNavItem(
-                            iconlnk: 'assets/icon/home.png',
-                            isSelected: true,
-                            onTap: () {
-                              Get.to(() => BerandaView());
-                            },
-                          ),
-                          _buildNavItem(
-                            iconlnk: 'assets/icon/profil.png',
-                            isSelected: false,
-                            onTap: () {
-                              Get.to(() => ProfilView());
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
+                    CustomBottomNavBar()
 
                     ],
                   ),
@@ -234,11 +202,14 @@ class BerandaView extends StatelessWidget {
   }
   
   Widget fitur({
-    required String iconPath,
-    required String title,
-    required Color color,
-  }) {
-    return Container(
+  required String iconPath,
+  required String title,
+  required Color color,
+  required VoidCallback? onTap,
+}) {
+  return GestureDetector(
+    onTap: onTap, // Jalankan fungsi saat diklik
+    child: Container(
       width: 100,
       height: 100,
       child: Column(
@@ -252,11 +223,11 @@ class BerandaView extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
             child: Center(
-              child: Image.asset( 
-              iconPath,
-              color: color,
-              width: 24,
-              height: 24,
+              child: Image.asset(
+                iconPath,
+                color: color,
+                width: 24,
+                height: 24,
               ),
             ),
           ),
@@ -265,40 +236,16 @@ class BerandaView extends StatelessWidget {
             title,
             textAlign: TextAlign.start,
             style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],
       ),
-    );
-  }
-  
-Widget _buildNavItem({
-  required String iconlnk,
-  required bool isSelected,
-  required VoidCallback onTap,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        color: isSelected ? Color(0xFF00B4D8) : Colors.transparent,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Center(
-        child: Image.asset(
-          iconlnk,
-          width: 30,
-          height: 30,
-          color: isSelected ? Colors.white : Colors.black,
-        ),
-      ),
     ),
   );
 }
+
 
 }
 
@@ -314,53 +261,94 @@ class _GambarSlideshowState extends State<GambarSlideshow> {
     'assets/img/imglab2.jpg',
   ];
 
-  int _currentIndex = 0;
+  final List<String> _imageNames = [
+    'Aula',
+    'Lapangan',
+    'Lab Komputer',
+  ];
+
+  late final PageController _pageController;
+  int _currentPage = 0;
   Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-      setState(() {
-        _currentIndex = (_currentIndex + 1) % _imagePaths.length;
-      });
+    _pageController = PageController();
+
+    _timer = Timer.periodic(Duration(seconds: 3), (Timer timer) {
+      if (_currentPage < _imagePaths.length - 1) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
+
+      if (mounted) {
+        _pageController.animateToPage(
+          _currentPage,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.easeInOut,
+        );
+      }
     });
   }
 
   @override
   void dispose() {
     _timer?.cancel();
+    _pageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Container(
-          height: 120,
-          width: double.infinity,
-          child: IndexedStack(
-            index: _currentIndex,
-            children: _imagePaths.map((path) {
-              return Image.asset(
-                path,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                errorBuilder: (context, error, stackTrace) {
-                  return Center(
-                    child: Icon(
-                      Icons.image_not_supported,
-                      size: 50,
-                      color: Colors.grey,
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: SizedBox(
+        height: 160, // tambahkan tinggi untuk menampung teks
+        child: PageView.builder(
+          controller: _pageController,
+          itemCount: _imagePaths.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      _imagePaths[index],
+                      height: 110, // tinggi gambar
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          height: 110,
+                          color: Colors.grey[300],
+                          child: Center(
+                            child: Icon(
+                              Icons.image_not_supported,
+                              size: 50,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              );
-            }).toList(),
-          ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    _imageNames[index],
+                    style: TextStyle(
+                      fontSize: 14, 
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

@@ -13,7 +13,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF2EFE9),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Container(
@@ -28,9 +28,9 @@ class LoginView extends StatelessWidget {
             ),
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.only(top: 25),
                 child: Text(
-                  'Login',
+                  'Welcome',
                   style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.w800,
@@ -54,12 +54,13 @@ class LoginView extends StatelessWidget {
                     Text(
                       'Nama Lengkap',
                       style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
+                      height: 45,
                       decoration: BoxDecoration(
                         color: Color(0xFFCAF0F8), // Light blue input field
                         borderRadius: BorderRadius.circular(15),
@@ -73,6 +74,9 @@ class LoginView extends StatelessWidget {
                         ],
                       ),
                       child: TextField(
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -86,12 +90,13 @@ class LoginView extends StatelessWidget {
                     Text(
                       'NISN',
                       style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
+                      height: 45,
                       decoration: BoxDecoration(
                         color: Color(0xFFCAF0F8), // Light blue input field
                         borderRadius: BorderRadius.circular(15),
@@ -105,6 +110,9 @@ class LoginView extends StatelessWidget {
                         ],
                       ),
                       child: TextField(
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -118,12 +126,13 @@ class LoginView extends StatelessWidget {
                     Text(
                       'Password',
                       style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
+                      height: 45,
                       decoration: BoxDecoration(
                         color: Color(0xFFCAF0F8), // Light blue input field
                         borderRadius: BorderRadius.circular(15),
@@ -137,6 +146,9 @@ class LoginView extends StatelessWidget {
                         ],
                       ),
                       child: TextField(
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                         obscureText: true, // For password field
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -151,7 +163,7 @@ class LoginView extends StatelessWidget {
                     Center(
                       child: Container(
                         width: double.infinity,
-                        height: 50,
+                        height: 45,
                         child: ElevatedButton(
                           onPressed: () {
                             Get.to(() => BerandaView());
@@ -167,7 +179,6 @@ class LoginView extends StatelessWidget {
                             'Login',
                             style: TextStyle(
                               fontSize: 18,
-                              fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),
