@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../controllers/feedback_controller.dart';
@@ -9,47 +8,48 @@ import 'package:k/app/widgets/navbar.dart';
 
 class FeedbackView extends GetView<FeedbackController> {
   const FeedbackView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xFF00B4D8),
+      backgroundColor: const Color(0xFF00B4D8),
       body: Column(
         children: [
           Container(
-            color: Color(0xFF00B4D8),
+            color: const Color(0xFF00B4D8),
             child: Column(
               children: [
                 SafeArea(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(20, 30, 20, 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Icon(
-                                  Icons.arrow_back,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Expanded(
-                                child: Text(
-                                  'Peminjaman',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Container(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(BerandaView());
+                          },
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const Expanded(
+                          child: Text(
+                            'Feedback',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
                           width: 30,
                           height: 30,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             shape: BoxShape.circle,
                           ),
@@ -61,160 +61,174 @@ class FeedbackView extends GetView<FeedbackController> {
                               height: 20,
                             ),
                             onPressed: () {
-                              Get.to(() => NotifView());
+                              Get.to(() => const NotifView());
                             },
                           ),
                         ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 40),
-
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 40),
               ],
             ),
           ),
-                       Expanded(
-                         child: 
-                           Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),  
-                                  topRight: Radius.circular(30)  
-                                  )
+          Expanded(
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(40, 35, 40, 0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Kami menghargai setiap saran dan kritik Anda.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      _buildTextAreaField(label: 'Pengalaman menggunakan aplikasi'),
+                      const SizedBox(height: 20),
+                      _buildTextAreaField(label: 'Masukan/Saran'),
+                      const SizedBox(height: 45),
+                      Center(
+                        child: SizedBox(
+                          width: 150,
+                          height: 40,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              _showConfirmDialog(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF00B4D8),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25),
                               ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(40, 35, 40, 0),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Kami menghargai setiap saran dan kritik Anda.',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      
-                                      
-                                      SizedBox(height: 30),
-                                      Text(
-                                        'Pengalaman menggunakan aplikasi',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Container(
-                                        height: 100,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFCAF0F8), // Light blue input field
-                                          borderRadius: BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.25),
-                                              blurRadius: 4,
-                                              offset: Offset(0, 4),
-                                              spreadRadius: 0,
-                                            ),
-                                          ],
-                                        ),
-                                          child: TextField(
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                            ),
-                                          maxLines: null, // penting: biar bisa multiline dinamis
-                                          expands: true,  // agar isi penuh ke tinggi container
-                                          keyboardType: TextInputType.multiline,
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(height: 20),
-                                      Text(
-                                        'Masukan/Saran',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Container(
-                                        height: 100,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFCAF0F8), // Light blue input field
-                                          borderRadius: BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.25),
-                                              blurRadius: 4,
-                                              offset: Offset(0, 4),
-                                              spreadRadius: 0,
-                                            ),
-                                          ],
-                                        ),
-                                          child: TextField(
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                            ),
-                                          maxLines: null, // penting: biar bisa multiline dinamis
-                                          expands: true,  // agar isi penuh ke tinggi container
-                                          keyboardType: TextInputType.multiline,
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                                          ),
-                                        ),
-                                      ),
-                                      
-                                      SizedBox(height: 45),
-
-                                      Center(
-                                      child: Container(
-                                        width: 150,
-                                        height: 40,
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            Get.to(() => BerandaView());
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Color(0xFF00B4D8), // Turquoise blue button
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(25),
-                                            ),
-                                            elevation: 2,
-                                          ),
-                                          child: Text(
-                                            'Kirim',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 20),
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-
+                              elevation: 2,
                             ),
-                       ), 
-                    CustomBottomNavBar()
+                            child: const Text(
+                              'Kirim',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          CustomBottomNavBar(),
         ],
-                    
       ),
+    );
+  }
+
+  Widget _buildTextAreaField({
+    required String label,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          height: 100,
+          decoration: BoxDecoration(
+            color: const Color(0xFFCAF0F8),
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+          child: const TextField(
+            style: TextStyle(fontSize: 15),
+            maxLines: null,
+            expands: true,
+            keyboardType: TextInputType.multiline,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
 
+  void _showConfirmDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          content: Text(
+            'Terima kasih atas masukan Anda. Masukan Anda telah kami terima dan akan kami evaluasi.',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Get.offAll(() => FeedbackView());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF00B4D8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ),
+                  child: Text(
+                    'Konfimasi',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }

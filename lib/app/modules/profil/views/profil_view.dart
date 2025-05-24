@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:k/app/modules/setting/views/setting_view.dart';
 
 import '../controllers/profil_controller.dart';
 import '../../home/views/home_view.dart';
@@ -21,28 +22,18 @@ class ProfilView extends GetView<ProfilController> {
             color: Color(0xFF00B4D8),
             child: Column(
               children: [
-                // AppBar section
                 SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(20, 30, 20, 15),
+                    padding: EdgeInsets.fromLTRB(45, 30, 20, 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                          ),
-                        ),
                         Expanded(
                           child: Text(
                             'Profil',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -176,13 +167,23 @@ class ProfilView extends GetView<ProfilController> {
                   ),
                   
                   SizedBox(height: 25),
+
+                  _buildProfileOption(
+                    icon: Icons.settings,
+                    label: 'Setting',
+                    onTap: () {
+                      Get.to(() => SettingView());
+                    },
+                  ),
+                  
+                  SizedBox(height: 25),
                   
                   // Logout Button
                   _buildProfileOption(
                     icon: Icons.logout,
                     label: 'Logout',
                     onTap: () {
-                      Get.offAll(() => HomeView());
+                      _showLogoutDialog(context);
                     },
                   ),
                   Spacer(),
@@ -197,6 +198,78 @@ class ProfilView extends GetView<ProfilController> {
     );
   }
   
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: Row(
+            children: [
+              Icon(
+                Icons.warning_amber_rounded,
+                color: Colors.orange,
+                size: 28,
+              ),
+              SizedBox(width: 10),
+              Text(
+                'Konfirmasi Logout',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            'Apakah Anda yakin ingin keluar dari aplikasi?',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Tutup dialog
+              },
+              child: Text(
+                'Batal',
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Tutup dialog
+                Get.offAll(() => HomeView()); // Lakukan logout
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF00B4D8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              ),
+              child: Text(
+                'Logout',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   
   Widget _buildProfileOption({
@@ -237,29 +310,4 @@ class ProfilView extends GetView<ProfilController> {
       ),
     );
   }
-}
-Widget _buildNavItem({
-  required String iconlnk,
-  required bool isSelected,
-  required VoidCallback onTap,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        color: isSelected ? Color(0xFF00B4D8) : Colors.transparent,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Center(
-        child: Image.asset(
-          iconlnk,
-          width: 30,
-          height: 30,
-          color: isSelected ? Colors.white : Colors.black,
-        ),
-      ),
-    ),
-  );
 }

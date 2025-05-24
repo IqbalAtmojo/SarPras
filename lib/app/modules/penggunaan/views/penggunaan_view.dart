@@ -126,25 +126,16 @@ class PenggunaanView extends GetView<PenggunaanController> {
                   children: [
                     SafeArea(
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 30, 20, 15),
+                        padding: EdgeInsets.fromLTRB(45, 30, 20, 15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Get.back();
-                              },
-                              child: Icon(
-                                Icons.arrow_back,
-                                color: Colors.white,
-                              ),
-                            ),
+                          children: [              
                             Expanded(
                               child: Text(
                                 'Fasilitas',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),

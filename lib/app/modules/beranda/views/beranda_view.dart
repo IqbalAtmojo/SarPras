@@ -29,9 +29,9 @@ class BerandaView extends StatelessWidget {
                       Text(
                         'Hi, Selamat Datang',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -74,7 +74,7 @@ class BerandaView extends StatelessWidget {
                         'assets/icon/mdi_google-classroom.png',
                         width: 21,
                         height: 21,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                       SizedBox(width: 8,),
                       Text(
@@ -82,7 +82,7 @@ class BerandaView extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -93,11 +93,11 @@ class BerandaView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        '1.408',
+                        '1.216',
                         style: TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -122,15 +122,25 @@ class BerandaView extends StatelessWidget {
                       // Filter Section
                       Padding(
                         padding: const EdgeInsets.fromLTRB(30, 25, 0, 0),
-                        child: Text(
-                          'Fitur',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.widgets,
+                              size: 20,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              'Fitur',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(height: 16),
+
                       
                       // fitur options
                       Row(
@@ -173,17 +183,26 @@ class BerandaView extends StatelessWidget {
                       
                       // Facilities Section
                       Padding(
-                        padding: const EdgeInsets.only(left: 30,),
-                        child: Text(
-                          'Fasilitas',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.apartment,
+                            size: 20, 
                           ),
-                        ),
+                          SizedBox(width: 5),
+                          Text(
+                            'Fasilitas',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 16),
-                      
+                    ),
+                    SizedBox(height: 16),
+
                       // Facility image
                       GambarSlideshow(),
 

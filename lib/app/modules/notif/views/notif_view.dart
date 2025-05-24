@@ -26,7 +26,7 @@ class NotifView extends GetView<NotifController> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pop(context);
+                                  Get.back();
                                 },
                                 child: Icon(
                                   Icons.arrow_back,
@@ -38,7 +38,7 @@ class NotifView extends GetView<NotifController> {
                                   'Notifikasi',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),

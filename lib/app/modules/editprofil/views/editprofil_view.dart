@@ -28,7 +28,7 @@ class EditprofilView extends GetView<EditprofilController> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.pop(context);
+                            Get.back();
                           },
                           child: Icon(
                             Icons.arrow_back,
@@ -40,7 +40,7 @@ class EditprofilView extends GetView<EditprofilController> {
                             'Profil',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -173,29 +173,28 @@ class EditprofilView extends GetView<EditprofilController> {
                     Text(
                       'Nama Lengkap',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color: Colors.black87,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
-                      height: 40,
+                      height: 50,
                       decoration: BoxDecoration(
-                        color: Color(0xFFCAF0F8), // Light blue input field
-                        borderRadius: BorderRadius.circular(10),
+                        color: Color(0xFFCAF0F8),
+                        borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.25),
-                            blurRadius: 4,
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
                             offset: Offset(0, 4),
                             spreadRadius: 0,
                           ),
                         ],
                       ),
                       child: TextField(
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
+                        style: TextStyle(fontSize: 15),
                         controller: TextEditingController(text: 'Ekasandi Iqbal Atmojo'),
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -210,29 +209,28 @@ class EditprofilView extends GetView<EditprofilController> {
                     Text(
                       'NISN',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color: Colors.black87,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
-                      height: 40,
+                      height: 50,
                       decoration: BoxDecoration(
-                        color: Color(0xFFCAF0F8), // Light blue input field
-                        borderRadius: BorderRadius.circular(10),
+                        color: Color(0xFFCAF0F8),
+                        borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.25),
-                            blurRadius: 4,
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
                             offset: Offset(0, 4),
                             spreadRadius: 0,
                           ),
                         ],
                       ),
                       child: TextField(
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
+                        style: TextStyle(fontSize: 15),
                         controller: TextEditingController(text: '0084269639'),
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -247,29 +245,28 @@ class EditprofilView extends GetView<EditprofilController> {
                     Text(
                       'No. Telepon',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color: Colors.black87,
                       ),
                     ),
                     SizedBox(height: 8),
                     Container(
-                      height: 40,
+                      height: 50,
                       decoration: BoxDecoration(
-                        color: Color(0xFFCAF0F8), // Light blue input field
-                        borderRadius: BorderRadius.circular(10),
+                        color: Color(0xFFCAF0F8),
+                        borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.25),
-                            blurRadius: 4,
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
                             offset: Offset(0, 4),
                             spreadRadius: 0,
                           ),
                         ],
                       ),
                       child: TextField(
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
+                        style: TextStyle(fontSize: 15),
                           controller: TextEditingController(text: '082230130798'),
                           decoration: InputDecoration(
                           border: InputBorder.none,
@@ -290,18 +287,19 @@ class EditprofilView extends GetView<EditprofilController> {
                             Get.to(() => ProfilView());
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF00B4D8), // Turquoise blue button
+                            backgroundColor: Color(0xFF00B4D8),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),
-                            elevation: 2,
+                            elevation: 5,
+                            shadowColor: Color(0xFF00B4D8).withOpacity(0.4),
                           ),
                           child: Text(
                             'Update Profil',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
                           ),
                         ),

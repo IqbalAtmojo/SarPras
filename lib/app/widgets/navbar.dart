@@ -5,6 +5,7 @@ import 'bottom_nav_controller.dart';
 import '../modules/beranda/views/beranda_view.dart';
 import '../modules/profil/views/profil_view.dart';
 import '../modules/penggunaan/views/penggunaan_view.dart';
+import '../modules/riwayat/views/riwayat_view.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final BottomNavController controller = Get.put(BottomNavController());
@@ -52,7 +53,7 @@ class CustomBottomNavBar extends StatelessWidget {
                   label: 'Riwayat',
                   onTap: () {
                     controller.changeIndex(3);
-                    Get.to(() => PenggunaanView());
+                    Get.to(() => RiwayatView());
                   },
                 ),
                 buildNavItem(

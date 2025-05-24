@@ -14,6 +14,8 @@ abstract class Routes {
   static const PEMINJAMAN = _Paths.PEMINJAMAN;
   static const PELAPORAN = _Paths.PELAPORAN;
   static const FEEDBACK = _Paths.FEEDBACK;
+  static const RIWAYAT = _Paths.RIWAYAT;
+  static const SETTING = _Paths.SETTING;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const PEMINJAMAN = '/peminjaman';
   static const PELAPORAN = '/pelaporan';
   static const FEEDBACK = '/feedback';
+  static const RIWAYAT = '/riwayat';
+  static const SETTING = '/setting';
 }

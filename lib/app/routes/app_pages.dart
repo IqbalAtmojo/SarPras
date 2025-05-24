@@ -22,6 +22,10 @@ import '../modules/profil/bindings/profil_binding.dart';
 import '../modules/profil/views/profil_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/riwayat/bindings/riwayat_binding.dart';
+import '../modules/riwayat/views/riwayat_view.dart';
+import '../modules/setting/bindings/setting_binding.dart';
+import '../modules/setting/views/setting_view.dart';
 
 part 'app_routes.dart';
 
@@ -85,6 +89,16 @@ class AppPages {
       name: _Paths.FEEDBACK,
       page: () => const FeedbackView(),
       binding: FeedbackBinding(),
+    ),
+    GetPage(
+      name: _Paths.RIWAYAT,
+      page: () => const RiwayatView(),
+      binding: RiwayatBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTING,
+      page: () => const SettingView(),
+      binding: SettingBinding(),
     ),
   ];
 }

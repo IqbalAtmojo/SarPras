@@ -28,7 +28,7 @@ class PeminjamanView extends GetView<PeminjamanController> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pop(context);
+                                  Get.to(BerandaView());
                                 },
                                 child: Icon(
                                   Icons.arrow_back,
@@ -40,7 +40,7 @@ class PeminjamanView extends GetView<PeminjamanController> {
                                   'Peminjaman',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -90,142 +90,30 @@ class PeminjamanView extends GetView<PeminjamanController> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'Nama Lengkap',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Container(
-                                        height: 45,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFCAF0F8), // Light blue input field
-                                          borderRadius: BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.25),
-                                              blurRadius: 4,
-                                              offset: Offset(0, 4),
-                                              spreadRadius: 0,
-                                            ),
-                                          ],
-                                        ),
-                                        child: TextField(
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                          ),
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                                          ),
-                                        ),
+                                      // Nama Lengkap Field
+                                      _buildInputField(
+                                        label: 'Nama Lengkap',
                                       ),
                                       
                                       SizedBox(height: 20),
-                                      Text(
-                                        'Tanggal dan Waktu',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Container(
-                                        height: 45,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFCAF0F8), // Light blue input field
-                                          borderRadius: BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.25),
-                                              blurRadius: 4,
-                                              offset: Offset(0, 4),
-                                              spreadRadius: 0,
-                                            ),
-                                          ],
-                                        ),
-                                        child: TextField(
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                          ),
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                                          ),
-                                        ),
+                                      
+                                      // Tanggal dan Waktu Field
+                                      _buildInputField(
+                                        label: 'Tanggal dan Waktu',
                                       ),
                                       
                                       SizedBox(height: 20),
-                                      Text(
-                                        'Fasilitas yang akan dipinjam',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Container(
-                                        height: 45,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFCAF0F8), // Light blue input field
-                                          borderRadius: BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.25),
-                                              blurRadius: 4,
-                                              offset: Offset(0, 4),
-                                              spreadRadius: 0,
-                                            ),
-                                          ],
-                                        ),
-                                        child: TextField(
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                          ),
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                                          ),
-                                        ),
+                                      
+                                      // Fasilitas Field
+                                      _buildInputField(
+                                        label: 'Fasilitas yang akan dipinjam',
                                       ),
                                       
                                       SizedBox(height: 20),
-                                      Text(
-                                        'Alasan',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Container(
-                                        height: 100,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFCAF0F8), // Light blue input field
-                                          borderRadius: BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.25),
-                                              blurRadius: 4,
-                                              offset: Offset(0, 4),
-                                              spreadRadius: 0,
-                                            ),
-                                          ],
-                                        ),
-                                          child: TextField(
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                            ),
-                                          maxLines: null, // penting: biar bisa multiline dinamis
-                                          expands: true,  // agar isi penuh ke tinggi container
-                                          keyboardType: TextInputType.multiline,
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                                          ),
-                                        ),
+                                      
+                                      // Alasan Field
+                                      _buildTextAreaField(
+                                        label: 'Alasan',
                                       ),
                                       
                                       SizedBox(height: 30),
@@ -236,21 +124,22 @@ class PeminjamanView extends GetView<PeminjamanController> {
                                         height: 40,
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            Get.to(() => BerandaView());
+                                            _showConfirmDialog(context);
                                           },
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: Color(0xFF00B4D8), // Turquoise blue button
+                                            backgroundColor: Color(0xFF00B4D8),
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(25),
                                             ),
-                                            elevation: 2,
+                                            elevation: 5,
+                                            shadowColor: const Color(0xFF00B4D8).withOpacity(0.4),
                                           ),
                                           child: Text(
                                             'Ajukan',
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.black,
+                                              color: Colors.white,
                                             ),
                                           ),
                                         ),
@@ -271,5 +160,137 @@ class PeminjamanView extends GetView<PeminjamanController> {
       ),
     );
   }
+  
+  Widget _buildInputField({
+    required String label,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          height: 50,
+          decoration: BoxDecoration(
+            color: const Color(0xFFCAF0F8),
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+          child: TextField(
+            style: const TextStyle(fontSize: 15),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+  
+  Widget _buildTextAreaField({
+    required String label,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          height: 100,
+          decoration: BoxDecoration(
+            color: const Color(0xFFCAF0F8),
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+          child: TextField(
+            style: const TextStyle(fontSize: 15),
+            maxLines: null,
+            expands: true,
+            keyboardType: TextInputType.multiline,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
+  void _showConfirmDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          content: Text(
+            'Terima kasih! Permintaan peminjaman Anda sedang diproses. Kami akan menginformasikan melalui notifikasi.',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Get.offAll(() => PeminjamanView());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF00B4D8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ),
+                  child: Text(
+                    'Konfimasi',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
