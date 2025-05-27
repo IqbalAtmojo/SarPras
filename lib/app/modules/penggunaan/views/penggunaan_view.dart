@@ -6,12 +6,11 @@ import '../controllers/penggunaan_controller.dart';
 import '../../notif/views/notif_view.dart';
 import 'package:k/app/widgets/navbar.dart';
 
-// Model untuk data tempat
 class TempatModel {
   final String imagePath;
   final String namaTempat;
   final String status;
-  final String kategori; // "Prasarana" atau "Sarana"
+  final String kategori; 
 
   TempatModel({
     required this.imagePath,
@@ -26,7 +25,6 @@ class PenggunaanView extends GetView<PenggunaanController> {
 
   @override
   Widget build(BuildContext context) {
-    // Data tempat dengan kategori
     final List<TempatModel> allTempat = [
       TempatModel(
         imagePath: "assets/img/lapangan.png",
@@ -96,25 +94,11 @@ class PenggunaanView extends GetView<PenggunaanController> {
       ),
     ];
 
+    final RxInt selectedFilterIndex = 0.obs;
+
     return GetBuilder<PenggunaanController>(
       init: PenggunaanController(),
       builder: (controller) {
-        // Filter data berdasarkan kategori yang dipilih
-        List<TempatModel> filteredTempat = allTempat.where((tempat) {
-          if (controller.selectedFilter == 'Semua') {
-            return true;
-          }
-          return tempat.kategori == controller.selectedFilter;
-        }).where((tempat) {
-          // Filter berdasarkan search query
-          if (controller.searchQuery.isEmpty) {
-            return true;
-          }
-          return tempat.namaTempat.toLowerCase().contains(
-            controller.searchQuery.toLowerCase(),
-          );
-        }).toList();
-
         return Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Color(0xFF00B4D8),
@@ -218,116 +202,99 @@ class PenggunaanView extends GetView<PenggunaanController> {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: Column(
-                      children: [
-                        // Filter Section
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: [
-                                      FilterChip(
-                                        label: 'Semua',
-                                        isSelected: controller.selectedFilter == 'Semua',
-                                        onTap: () {
-                                          controller.updateFilter('Semua');
-                                        },
-                                      ),
-                                      SizedBox(width: 10),
-                                      FilterChip(
-                                        label: 'Prasarana',
-                                        isSelected: controller.selectedFilter == 'Prasarana',
-                                        onTap: () {
-                                          controller.updateFilter('Prasarana');
-                                        },
-                                      ),
-                                      SizedBox(width: 10),
-                                      FilterChip(
-                                        label: 'Sarana',
-                                        isSelected: controller.selectedFilter == 'Sarana',
-                                        onTap: () {
-                                          controller.updateFilter('Sarana');
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 25),
-                        // Content Cards
-                        Expanded(
-                          child: filteredTempat.isEmpty
-                              ? Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.search_off,
-                                        size: 64,
-                                        color: Colors.grey[400],
-                                      ),
-                                      SizedBox(height: 16),
-                                      Text(
-                                        'Tidak ada tempat ditemukan',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.grey[600],
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text(
-                                        'Coba ubah filter atau kata kunci pencarian',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.grey[500],
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : SingleChildScrollView(
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Filter Tabs
+                          _buildFilterTabs(selectedFilterIndex),
+                          
+                          SizedBox(height: 20),
+                          
+                          // Content Cards
+                          Obx(() {
+                            // Filter data berdasarkan kategori yang dipilih
+                            List<TempatModel> filteredTempat = allTempat;
+                            
+                            if (selectedFilterIndex.value == 1) {
+                              filteredTempat = allTempat.where((tempat) => tempat.kategori == 'Prasarana').toList();
+                            } else if (selectedFilterIndex.value == 2) {
+                              filteredTempat = allTempat.where((tempat) => tempat.kategori == 'Sarana').toList();
+                            }
+                            
+                            // Filter berdasarkan search query
+                            filteredTempat = filteredTempat.where((tempat) {
+                              if (controller.searchQuery.isEmpty) {
+                                return true;
+                              }
+                              return tempat.namaTempat.toLowerCase().contains(
+                                controller.searchQuery.toLowerCase(),
+                              );
+                            }).toList();
+
+                            return filteredTempat.isEmpty
+                                ? Center(
                                     child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        for (int i = 0; i < filteredTempat.length; i += 2)
-                                          Padding(
-                                            padding: EdgeInsets.only(bottom: 25),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                buildTempatCard(
-                                                  filteredTempat[i].imagePath,
-                                                  filteredTempat[i].namaTempat,
-                                                  filteredTempat[i].status,
-                                                ),
-                                                if (i + 1 < filteredTempat.length)
-                                                  buildTempatCard(
-                                                    filteredTempat[i + 1].imagePath,
-                                                    filteredTempat[i + 1].namaTempat,
-                                                    filteredTempat[i + 1].status,
-                                                  )
-                                                else
-                                                  Container(width: 150), // Placeholder untuk spacing
-                                              ],
-                                            ),
+                                        Icon(
+                                          Icons.search_off,
+                                          size: 64,
+                                          color: Colors.grey[400],
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          'Tidak ada tempat ditemukan',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.grey[600],
+                                            fontWeight: FontWeight.w500,
                                           ),
+                                        ),
+                                        SizedBox(height: 8),
+                                        Text(
+                                          'Coba ubah filter atau kata kunci pencarian',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey[500],
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                ),
-                        ),
-                      ],
+                                  )
+                                : Column(
+                                    children: [
+                                      for (int i = 0; i < filteredTempat.length; i += 2)
+                                        Padding(
+                                          padding: EdgeInsets.only(bottom: 25),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              buildTempatCard(
+                                                filteredTempat[i].imagePath,
+                                                filteredTempat[i].namaTempat,
+                                                filteredTempat[i].status,
+                                              ),
+                                              if (i + 1 < filteredTempat.length)
+                                                buildTempatCard(
+                                                  filteredTempat[i + 1].imagePath,
+                                                  filteredTempat[i + 1].namaTempat,
+                                                  filteredTempat[i + 1].status,
+                                                )
+                                              else
+                                                Container(width: 150), // Placeholder untuk spacing
+                                            ],
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                          }),
+                          
+                          SizedBox(height: 20),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -339,40 +306,55 @@ class PenggunaanView extends GetView<PenggunaanController> {
       },
     );
   }
-}
-
-class FilterChip extends StatelessWidget {
-  final String label;
-  final bool isSelected;
-  final VoidCallback? onTap;
-
-  const FilterChip({
-    Key? key,
-    required this.label,
-    required this.isSelected,
-    this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: isSelected ? Color(0xFF00B4D8) : Colors.grey[100],
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: isSelected ? Color(0xFF00B4D8) : Colors.grey[300]!,
-            width: 1,
+  
+  Widget _buildFilterTabs(RxInt selectedFilterIndex) {
+    return Obx(() => Container(
+      height: 45,
+      decoration: BoxDecoration(
+        color: Color(0xFFCAF0F8),
+        borderRadius: BorderRadius.circular(25),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: Offset(0, 4),
+            spreadRadius: 0,
           ),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.grey[700],
-            fontSize: 12,
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        ],
+      ),
+      child: Row(
+        children: [
+          _buildFilterTab('Semua', 0, selectedFilterIndex),
+          _buildFilterTab('Prasarana', 1, selectedFilterIndex),
+          _buildFilterTab('Sarana', 2, selectedFilterIndex),
+        ],
+      ),
+    ));
+  }
+  
+  Widget _buildFilterTab(String title, int index, RxInt selectedFilterIndex) {
+    bool isSelected = selectedFilterIndex.value == index;
+    
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          selectedFilterIndex.value = index;
+        },
+        child: Container(
+          margin: EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: isSelected ? Color(0xFF00B4D8) : Colors.transparent,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style: TextStyle(
+                color: isSelected ? Colors.white : Color(0xFF00B4D8),
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                fontSize: 14,
+              ),
+            ),
           ),
         ),
       ),

@@ -428,7 +428,6 @@ class _SettingViewState extends State<SettingView> {
   
   
   void _saveSettings() {
-    // Implement save settings logic here
     _showSuccessSnackbar('Pengaturan berhasil disimpan!');
   }
   
